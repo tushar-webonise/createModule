@@ -1,0 +1,59 @@
+{
+  "name": "sungard-PACKAGENAME-module",
+  "version": "1.0.0",
+  "engines": {
+    "node": "^v8.11.1"
+  },
+  "description": "React Sungard PACKAGENAME Module",
+  "main": "./dist/index.min.js",
+  "scripts": {
+    "start": "webpack-dev-server --watch --config ./configs/webpack/webpack.config.development.js --history-api-fallback",
+    "build": "npm run clean && npm install && webpack --config ./configs/webpack/webpack.config.js",
+    "onlybuild": "webpack --config ./configs/webpack/webpack.config.js",
+    "clean": "node remove.js node_modules package-lock.json",
+    "test": "jest",
+    "test-coverage": "jest --coverage",
+    "build:dev": "webpack --watch --config ./configs/webpack/webpack.config.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "chart": "file:../charts",
+    "request-service": "file:../request-service",
+    "sungard-ui-toolkit": "file:../css-module",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-config": "^1.0.0-beta.4",
+    "react-router-dom": "^4.2.2"
+  },
+  "peerDependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-config": "^1.0.0-beta.4",
+    "react-router-dom": "^4.2.2",
+    "request-service": "file:../request-service"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.1",
+    "css-loader": "^0.28.11",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.0",
+    "node-sass": "^4.9.0",
+    "optimize-css-assets-webpack-plugin": "^4.0.3",
+    "sass-loader": "^7.0.2",
+    "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "webpack": "^4.16.3",
+    "webpack-cli": "^2.1.5",
+    "webpack-dev-server": "^3.1.5"
+  },
+  "files": [
+    "dist"
+  ]
+}

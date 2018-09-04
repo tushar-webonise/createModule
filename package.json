@@ -1,0 +1,14 @@
+{
+  "name": "moduletemplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "createTemplate.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "read-dir-files": "^0.1.1"
+  }
+}
