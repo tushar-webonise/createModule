@@ -1,9 +1,21 @@
-const config = {
-  TEMPMODULENAME: 'Srm',
-  tEMPMODUL: 'srm',
-  MODULETITLE: 'R2C - Server Recovery Manager',
-  FOLDERNAME: 'srm',
-  PACKAGENAME: 'srm'
-};
+const moduleName = 'Srm';
+const title = 'title';
+const API_END_POINT = 'srm';
+// ####  update above values
 
-module.exports = config;
+function getConfigs(moduleName, title) {
+  var widgetName =
+    moduleName[0].toUpperCase() +
+    moduleName.substring(1, moduleName.length).toLowerCase();
+  var smallcase = moduleName.toLowerCase();
+  const config = {
+    TEMPMODULENAME: widgetName,
+    tEMPMODUL: smallcase,
+    MODULETITLE: title,
+    FOLDERNAME: smallcase,
+    PACKAGENAME: smallcase,
+    APIENDPOINT: API_END_POINT,
+  };
+  return config;
+}
+module.exports = getConfigs(moduleName, title);

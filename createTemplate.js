@@ -14,11 +14,13 @@ readDirFiles.list(modulePath, function(err, filenames) {
 
 function smartReplace(name) {
   let newName = name;
+
   Object.keys(strings).forEach(function(key) {
     var find = key;
     var regX = new RegExp(find, 'g');
     newName = newName.replace(regX, strings[key]);
   });
+
   return newName;
 }
 
