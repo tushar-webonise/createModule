@@ -16,32 +16,32 @@ module.exports = {
   devtool: 'eval-source-map',
   mode: 'development',
   entry: {
-    index: [path.join(rootPath, '/main.js')]
+    index: [path.join(rootPath, '/main.js')],
   },
   output: {
     path: path.resolve(rootPath, '/dist/'),
     filename: '[name].js',
-    publicPath: '/'
+    publicPath: '/',
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new webpack.ProvidePlugin({
-      react: 'react'
+      react: 'react',
     }),
 
     new HtmlWebpackPlugin({
       template: 'src/index.tpl.html',
       inject: 'body',
       filename: 'index.html',
-      chunks: ['index']
+      chunks: ['index'],
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
-      chunkFilename: '[id].css'
+      chunkFilename: '[id].css',
     }),
     new CopyWebpackPlugin([
-      {from: path.join(rootPath, 'src/static/images'), to: 'assets/images'}
-    ])
+      {from: path.join(rootPath, 'src/static/images'), to: 'assets/images'},
+    ]),
   ],
   resolve: {
     alias: {
@@ -53,20 +53,28 @@ module.exports = {
       reducers: path.resolve(rootPath, 'src/js/reducers/'),
       components: path.resolve(rootPath, 'src/js/components/'),
       images: path.resolve(rootPath, 'src/static/images'),
-      style: path.resolve(rootPath, 'src/sass')
+      style: path.resolve(rootPath, 'src/sass'),
     },
-    extensions: ['.js', '.jsx', '.json', '.css', '.sass']
+    extensions: ['.js', '.jsx', '.json', '.css', '.sass'],
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
-        use: 'babel-loader'
+        use: 'babel-loader',
+      },
+      {
+        test: /\.json$/,
+        use: 'json-loader',
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot|pdf|ico)$/,
+        use: 'file-loader',
       },
       {
         test: /\.css/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.sass$/,
@@ -76,16 +84,16 @@ module.exports = {
             loader: 'css-loader',
             options: {
               minimize: {
-                safe: true
-              }
-            }
+                safe: true,
+              },
+            },
           },
           {
-            loader: 'sass-loader'
-          }
-        ]
-      }
-    ]
+            loader: 'sass-loader',
+          },
+        ],
+      },
+    ],
   },
   devServer: {
     disableHostCheck: true,
@@ -94,7 +102,7 @@ module.exports = {
     contentBase: path.resolve(rootPath, '/dist/'),
     open: true,
     proxy: {
-      '/api': 'http://localhost:4001'
-    }
-  }
+      '/api': 'http://localhost:4001',
+    },
+  },
 };

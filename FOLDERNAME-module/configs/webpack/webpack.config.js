@@ -22,32 +22,32 @@ BuildCompletionNotifyPlugin.prototype.apply = function(compiler) {
 module.exports = {
   mode: 'production',
   entry: {
-    index: [path.join(rootPath, './index.js')]
+    index: [path.join(rootPath, './index.js')],
   },
   output: {
     path: path.join(rootPath, '/dist/'),
     filename: '[name].min.js',
-    libraryTarget: 'commonjs2'
+    libraryTarget: 'commonjs2',
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
 
     new OptimizeCssAssetsPlugin(),
     new UglifyJsPlugin({
       sourceMap: true,
-      parallel: 4
+      parallel: 4,
     }),
     new BuildCompletionNotifyPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].min.css',
-      chunkFilename: '[id].css'
+      chunkFilename: '[id].css',
     }),
     new CopyWebpackPlugin([
-      {from: path.join(rootPath, 'src/static/images'), to: 'assets/images'}
-    ])
+      {from: path.join(rootPath, 'src/static/images'), to: 'assets/images'},
+    ]),
   ],
   resolve: {
     alias: {
@@ -59,20 +59,28 @@ module.exports = {
       reducers: path.resolve(rootPath, 'src/js/reducers/'),
       components: path.resolve(rootPath, 'src/js/components/'),
       images: path.resolve(rootPath, 'src/static/images'),
-      style: path.resolve(rootPath, 'src/sass')
+      style: path.resolve(rootPath, 'src/sass'),
     },
-    extensions: ['.js', '.jsx', '.json', '.css', '.sass']
+    extensions: ['.js', '.jsx', '.json', '.css', '.sass'],
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
-        use: 'babel-loader'
+        use: 'babel-loader',
+      },
+      {
+        test: /\.json$/,
+        use: 'json-loader',
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot|pdf|ico)$/,
+        use: 'file-loader',
       },
       {
         test: /\.css/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.sass$/,
@@ -82,16 +90,16 @@ module.exports = {
             loader: 'css-loader',
             options: {
               minimize: {
-                safe: true
-              }
-            }
+                safe: true,
+              },
+            },
           },
           {
-            loader: 'sass-loader'
-          }
-        ]
-      }
-    ]
+            loader: 'sass-loader',
+          },
+        ],
+      },
+    ],
   },
   externals: {
     react: 'commonjs react',
@@ -99,6 +107,5 @@ module.exports = {
     'react-router-config': 'commonjs react-router-config',
     'react-router-dom': 'commonjs react-router-dom',
     reactstrap: 'commonjs reactstrap',
-    'request-service': 'commonjs request-service'
-  }
+  },
 };
